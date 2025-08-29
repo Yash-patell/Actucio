@@ -9,6 +9,8 @@ import os
 from docx import Document          # For Word template filling
 from docx2pdf import convert       # Optional: Word → PDF conversion
 import zipfile   
+from dotenv import load_dotenv
+import os
 def extract_text(file_path: str):
     ext = os.path.splitext(file_path)[1].lower()
     if ext in [".jpg", ".jpeg", ".png"]:
@@ -197,7 +199,8 @@ if __name__ == "__main__":
     print("\n✅ All extractions done. Ready for structured LLM processing.")
 
     # Step 2: Send extracted text to Gemini API
-    api_key = "AIzaSyCT_5K146y4j6-XylCows4tXQb6iyGXlvs"
+    load_dotenv
+    api_key = os.getenv('APIkey_gemini')
     structured_data_all_files = {}
 
     for file_name, text in all_texts.items():
@@ -230,4 +233,3 @@ if __name__ == "__main__":
     
     
     
-# api_key = "AIzaSyArAIdpkxBl4Xzif_br7Fz4R3c2hGYvZns"  # Store securely in .env or secrets
